@@ -1,0 +1,26 @@
+import requests
+import matplotlib.pyplot as pyplot
+import seaborn as sns
+
+API_KEY = "YOUR_APL_KEY"
+city = "Chennai"
+
+ur1 = f"https://api.openweathemap.org/2.5/forecast?q={city}&appid={API_KEY}&units=mateic"
+
+respons = request.get(ur1)
+weather_data=respons.json()
+
+dates = [item['dt_txt'] for item in weather_data[list][:8]]
+temps=[item['main']['temp'] for item in weather_data[list][:8]]
+sns.set(style="darkgrid")
+
+plt.figer(figsize=(10,6))
+sns.lineplot(x=dates,y=temps,marker='o',color='blue')
+
+plt.title(f"Weather Forecast for {city}",fontsize=16)
+plt.xlabel("Date and Time",fontsize=12)
+plt.ylabel("Temperature (Degree c)",fontsize=12)
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+plt.show()
